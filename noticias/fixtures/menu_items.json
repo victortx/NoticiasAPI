@@ -1,0 +1,22 @@
+[
+  {
+    "model": "noticias.menuitem",
+    "pk": 1,
+    "fields": { "nombre": "Dashboard", "icono": "bi-grid-1x2", "estado": "activo", "ruta": "/dashboard" }
+  },
+  {
+    "model": "noticias.menuitem",
+    "pk": 2,
+    "fields": { "nombre": "Categorías", "icono": "bi-gear", "estado": "activo", "ruta": "/categorias" }
+  },
+  {
+    "model": "noticias.menuitem",
+    "pk": 3,
+    "fields": { "nombre": "Noticias",   "icono": "bi-newspaper", "estado": "activo", "ruta": "/noticias" }
+  },
+  {
+    "model": "noticias.menuitem",
+    "pk": 4,
+    "fields": { "nombre": "Usuarios",   "icono": "bi-people", "estado": "activo", "ruta": "/usuarios" }
+  }
+]

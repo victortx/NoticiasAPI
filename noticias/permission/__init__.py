@@ -1,0 +1,1 @@
+from .permissionAutor import *

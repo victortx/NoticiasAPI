@@ -1,0 +1,64 @@
+# ----------------------------
+# Python / Django
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Dependencias / empaquetado
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+logs/
+celerybeat-schedule
+
+# Django
+db.sqlite3
+media/                 # archivos subidos por usuarios
+staticfiles/           # STATIC_ROOT (coincide con collectstatic)
+# Si tu STATIC_ROOT se llama distinto, ignóralo aquí:
+# static_root/
+
+# Archivos de configuración locales
+.env
+.env.*
+!.env.example          # deja tu ejemplo versionado
+settings_local.py
+local_settings.py
+
+# Tests / Coverage / Caches
+.pytest_cache/
+.coverage*
+.cache/
+.tox/
+.nox/
+htmlcov/
+coverage.xml
+nosetests.xml
+
+# Tipado / linters
+.mypy_cache/
+.pyre/
+.pytype/
+ruff_cache/
+
+# IDE / SO
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Docker (opcional)
+docker-data/
