@@ -4,6 +4,7 @@ from usuarios.managers import UsuarioManager
 
 
 class Usuario(AbstractUser):
+    email = models.EmailField(unique=True)
     telefono = models.CharField("Teléfono", max_length=20, blank=True)
     direccion = models.CharField('Direccion', max_length=255, blank=True)
 
