@@ -26,7 +26,8 @@ from django.conf.urls.static import static
 
 from usuarios.views import FacebookRegisterAPIView
 from usuarios.views.admin_views import UsuariosAdminListAPIView, UsuarioToggleEstadoAPIView
-from usuarios.views.auth_view import EmailLoginView, RegistroAPIView, ActivarCuentaAPIView, PasswordCheckAPIView
+from usuarios.views.auth_view import EmailLoginView, RegistroAPIView, ActivarCuentaAPIView, PasswordCheckAPIView, \
+    PasswordForgotAPIView, PasswordResetAPIView, PasswordChangeAPIView
 
 router = DefaultRouter()
 router.register(r"categorias", CategoriaViewSet, basename="categoria")
@@ -52,6 +53,9 @@ urlpatterns = [
     path("api/auth/register/", RegistroAPIView.as_view(), name="register"),
     path("api/auth/activate/<uidb64>/<token>/", ActivarCuentaAPIView.as_view(), name="activate-account"),
     path("api/auth/password-check/", PasswordCheckAPIView.as_view(), name="password-check"),
+    path("api/auth/password/forgot/", PasswordForgotAPIView.as_view(), name="password-forgot"),
+    path("api/auth/password/reset/", PasswordResetAPIView.as_view(), name="password-reset"),
+    path("api/auth/password/change/", PasswordChangeAPIView.as_view(), name="password-change"),
 
     # USUARIOS
     path("api/admin/usuarios/", UsuariosAdminListAPIView.as_view(), name="admin-usuarios-list"),

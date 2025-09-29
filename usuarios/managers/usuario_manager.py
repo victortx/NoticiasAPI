@@ -1,4 +1,5 @@
 from django.contrib.auth.models import UserManager
+from django.contrib import admin
 
 class UsuarioManager(UserManager):
     def create_user(self, username, email=None, password=None, **extra_fields):

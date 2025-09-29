@@ -66,3 +66,54 @@ def enviar_email_activacion(user, request, temp_password: str | None = None):
     )
     msg.attach_alternative(html, "text/html")
     msg.send(fail_silently=False)
+
+
+def enviar_email_reset_password(user):
+    uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+    token = default_token_generator.make_token(user)
+
+    base = ("http://localhost:4200/auth").rstrip("/")
+    # Ruta del front donde el usuario pondrá su nueva contraseña:
+    url = f"{base}/reset?uid={uidb64}&token={token}"
+
+    subject = "Recupera tu contraseña"
+    text = (
+        f"Hola {user.first_name or user.username},\n\n"
+        f"Para reiniciar tu contraseña, usa este enlace:\n{url}\n\n"
+        "Si no solicitaste este cambio, ignora este correo."
+    )
+    html = f"""
+    <div style="font-family:Arial,Helvetica,sans-serif;line-height:1.6;">
+      <h2>Reinicio de contraseña</h2>
+      <p>Hola <strong>{(user.first_name or user.username)}</strong>,</p>
+      <p>Para reiniciar tu contraseña, haz clic en el botón:</p>
+      <p>
+        <a href="{url}" style="background:#16a34a;color:#fff;padding:10px 16px;text-decoration:none;border-radius:6px;display:inline-block;">
+          Reiniciar contraseña
+        </a>
+      </p>
+      <p>O copia y pega este enlace:<br><a href="{url}">{url}</a></p>
+      <hr>
+      <small>Si no solicitaste este cambio, ignora este mensaje.</small>
+    </div>
+    """
+
+    connection = get_connection(
+        backend=settings.EMAIL_BACKEND,
+        host=settings.EMAIL_HOST,
+        port=settings.EMAIL_PORT,
+        username=settings.EMAIL_HOST_USER,
+        password=settings.EMAIL_HOST_PASSWORD,
+        use_tls=getattr(settings, "EMAIL_USE_TLS", False),
+        use_ssl=getattr(settings, "EMAIL_USE_SSL", False),
+    )
+
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[user.email],
+        connection=connection,
+    )
+    msg.attach_alternative(html, "text/html")
+    msg.send(fail_silently=False)
